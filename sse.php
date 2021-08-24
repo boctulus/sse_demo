@@ -1,24 +1,38 @@
 <?php
 
-require 'Sse.php';
+require 'SSE.php';
 
-/*
-	Ejemplo de uso
-*/
+$vendor = $_GET['vendor'] ?? '';
+
 
 $sse = new SSE();
-$sse->setInterval(1);
 
+$sse->setDefaultChannel('synced');
+
+
+if (empty($vendor)){
+	$sse->send([
+		'error' => 'vendor is empty'
+	]);
+
+	exit(0);
+}
+
+
+$current = 0;
 while (1) 
 {
 	$data = [
-		'name' => 'Felipe',
-		'age'  => 10
+		'vendor' => $vendor,
+		'products'  => [
+			'current' => $current,
+			'total'   => 253
+		]
 	];
 
-	$sse->send('Hello World');  
-	$sse->send($data, 'vendor-x#created');
+	$sse->send($data);
 	
+	$current++;
 }
 
 

@@ -6,9 +6,9 @@
 <script>
     window.onload = function() {
 
-        let source = new EventSource("sse.php");
+        let source = new EventSource("sse.php?vendor=hupit");
       
-        source.addEventListener("vendor-x#created", function(e) {
+        source.addEventListener("synced", function(e) {
         	
 		  let obj = JSON.parse(e.data);
 		  console.log(obj);
