@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Using Server-Sent Events</title>
+<title>Server-Sent Events  (SSE)</title>
+
 <script>
     window.onload = function() {
-    	const eventList = document.querySelector('#result');
 
-        var source = new EventSource("server_time.php");
+        var source = new EventSource("sse.php");
       
         source.addEventListener("vendor-x#created", function(e) {
         	
@@ -14,12 +14,11 @@
 		  console.log(obj);
 
 		}, false);
-
-
-
     };
 </script>
+
 </head>
+
 <body>
     <ul id="result">
         <!--Server response will be inserted here-->
