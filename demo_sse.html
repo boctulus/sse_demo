@@ -6,14 +6,22 @@
 <script>
     window.onload = function() {
 
-        var source = new EventSource("sse.php");
+        let source = new EventSource("sse.php");
       
         source.addEventListener("vendor-x#created", function(e) {
         	
-		  var obj = JSON.parse(e.data);
+		  let obj = JSON.parse(e.data);
 		  console.log(obj);
 
 		}, false);
+
+		function close(){
+			source.close();
+		}
+
+		source.onerror = function(e) {
+		  console.log("Error en evento SSE");
+		};
     };
 </script>
 
